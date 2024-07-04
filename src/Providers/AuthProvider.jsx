@@ -9,6 +9,7 @@ export const AuthContext = createContext(null)
 function AuthProvider({ children }) {
 
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const googleProvider = new GoogleAuthProvider;
     const githubProvider = new GithubAuthProvider;
@@ -17,13 +18,21 @@ function AuthProvider({ children }) {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user)
+                setLoading(false)
             }
             else {
                 setUser(null)
+                setLoading(false)
             }
         })
         return () => unsubscribe();
     }, [])
+
+    if(loading){
+        return <div className="flex justify-center items-center h-screen">
+            <span className="loading loading-dots loading-lg"></span>
+        </div>
+    }
 
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)

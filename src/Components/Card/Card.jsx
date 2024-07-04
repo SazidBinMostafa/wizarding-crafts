@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Card.css'
 import PropTypes from 'prop-types';
 
@@ -15,7 +16,7 @@ function Card({craft}) {
                 <h2 className="card-title">{craft.name}</h2>
                 <p>{craft.price} tk</p>
                 <div className="card-actions">
-                    <button className="btn btn-neutral">View details</button>
+                    <Link to={`http://localhost:5173/craft/${craft._id}`} className="btn btn-neutral">View details</Link>
                 </div>
             </div>
         </div>
