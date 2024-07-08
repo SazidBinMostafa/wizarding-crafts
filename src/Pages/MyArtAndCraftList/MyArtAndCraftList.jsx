@@ -1,9 +1,38 @@
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+import { Link } from "react-router-dom";
+import Card from "../../Components/Card/Card";
 
 
-function MyArtAndCraftList(){
+function MyArtAndCraftList() {
+    const {user} = useContext(AuthContext);
+    const {email} = user;
+
+    const [crafts, setCrafts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/crafts/${email}`)
+            .then(res => res.json())
+            .then(data => {
+                setCrafts(data)
+                setLoading(false)
+            })
+    }, [])
+
+    if (loading) {
+        return <div className="w-full h-screen flex items-center justify-center">
+            <span className="loading loading-dots loading-lg"></span>
+        </div>
+    }
 
     return <>
-    
+        <section className="mx-5 md:mx-14">
+            <h1 className="text-3xl font-bold my-14 text-center">Magical Creations: Browse All Crafts Items</h1>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {crafts.map(craft => <Card key={craft._id} craft={craft}></Card>)}
+            </div>
+        </section>
     </>
 }
 

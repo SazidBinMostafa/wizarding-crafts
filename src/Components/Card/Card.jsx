@@ -4,19 +4,26 @@ import PropTypes from 'prop-types';
 
 function Card({craft}) {
 
+    const { name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus, userEmail, userName
+    } = craft;
+
     return <>
-        <div id='card' className="card bg-base-100 w-80 border shadow-xl bg-center">
-            <figure id='cardImage' className="px-10 pt-10">
-                <img
-                    src={craft.imageURL}
-                    alt={`Image of ${craft.name}`}
-                    className="rounded-xl" />
+       <div className="card border bg-base-100 shadow-xl font-semibold w-fit">
+            <figure id='cardImage' className='bg-center h-96'>
+                <img className='w-60'
+                    src={imageURL}
+                    alt="Movie" />
             </figure>
-            <div className="card-body items-center text-center">
-                <h2 className="card-title">{craft.name}</h2>
+            <div className="card-body">
+                <h2 className="card-title">{name}</h2>
+                <p className='flex items-center'>Rating: {rating} <span className="material-symbols-outlined">star</span></p>
                 <p>{craft.price} tk</p>
+                <p>Customization: {customization}</p>
+                <p>stockStatus: <span className='text-green-600'>{stockStatus}</span></p>
                 <div className="card-actions">
-                    <Link to={`http://localhost:5173/craft/${craft._id}`} className="btn btn-neutral">View details</Link>
+                    <Link to={`http://localhost:5173/craft/${craft._id}`} className="btn btn-outline">View details</Link>
+                    <Link to={`http://localhost:5173/craft/${craft._id}`} className="btn btn-outline btn-success">Edit</Link>
+                    <btn className="btn btn-outline btn-error">Remove</btn>
                 </div>
             </div>
         </div>

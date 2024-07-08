@@ -140,7 +140,9 @@ function AddCraftItem() {
                                 <div className="label">
                                     <span className="label-text">User Email</span>
                                 </div>
-                                <input required defaultValue={email} name='userEmail' type="email" placeholder="Enter your user email" className="input input-bordered w-full" />
+                                <div className="border border-gray-300 rounded-lg">
+                                <input disabled required defaultValue={email} name='userEmail' type="email" placeholder="Enter your user email" className="input input-bordered w-full" />
+                                </div>
                             </label>
                         </div>
                         <label className="form-control w-full">
@@ -150,7 +152,7 @@ function AddCraftItem() {
                             <textarea required name='description' type="text" placeholder="Write a short description" className="textarea textarea-bordered w-full" />
                         </label>
                     </div>
-                    <input className='btn btn-block btn-neutral mt-5' type="submit" value="Add Craft Item" />
+                    <input className='btn btn-block btn-neutral mt-5' type="submit" value="Add" />
                 </form>
             </div>
         </section>

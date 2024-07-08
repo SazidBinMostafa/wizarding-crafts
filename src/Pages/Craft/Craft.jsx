@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import './Craft.css'
 
 
@@ -6,9 +6,9 @@ function Craft() {
 
     const craft = useLoaderData();
     const { name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus, userEmail, userName
-    } = craft
-
+    } = craft;
     return <>
+        <div className="bg-base-200 font-bold py-5"><Link className="flex items-cente gap-1" to={'/All-Art-&-Craft-Items'}><span className="material-symbols-outlined">arrow_back</span>Go back</Link></div>
         <div className="hero bg-base-200 min-h-screen px-5 md:px-14 lg:px-32">
             <div className="hero-content flex-col lg:flex-row">
                 <div id="craftImage" className="bg-center">

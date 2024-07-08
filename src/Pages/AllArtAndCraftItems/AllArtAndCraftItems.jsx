@@ -1,22 +1,43 @@
 import { useEffect, useState } from "react";
-import Card from "../../Components/Card/Card";
+import './AllArtAndCraftItems.css'
+import { Link } from "react-router-dom";
 
 
-function AllArtAndCraftItems(){
+
+function AllArtAndCraftItems() {
 
     const [crafts, setCrafts] = useState([]);
-    useEffect(()=>{
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
         fetch('http://localhost:5000/crafts')
-        .then(res=> res.json())
-        .then(data=> setCrafts(data))
+            .then(res => res.json())
+            .then(data => {
+                setCrafts(data)
+                setLoading(false)
+            })
     }, [])
-    
-    return <section className="mx-5 md:mx-42 lg:mx-32">
-        <h1 className="text-3xl font-bold my-14 text-center">Magical Creations: Browse All Crafts Items</h1>
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 w-fit mx-auto">
-            {crafts && crafts.map(craft=><Card key={craft._id} craft={craft}></Card>)}
+
+    if (loading) {
+        return <div className="w-full h-screen flex items-center justify-center">
+            <span className="loading loading-dots loading-lg"></span>
         </div>
+    }
+
+    return <>
+        <section className="mx-5 md:mx-42 lg:mx-32">
+        <h1 className="text-3xl font-bold my-14 text-center">Magical Creations: Browse All Crafts Items</h1>
+            <table className="table border w-full table-zebra text-xl">
+                <tbody>
+                    {crafts && crafts.map(craft => <tr key={craft._id} className="align-middle text-center">
+                        <td className="w-40"><img src={craft.imageURL} alt="" /></td>
+                        <td>{craft.name}</td>
+                        <td><Link className="btn btn-outline" to={`/craft/${craft._id}`}>View Details</Link></td>
+                    </tr>)}
+                </tbody>
+            </table>
     </section>
+    </>
 }
 
 export default AllArtAndCraftItems;
