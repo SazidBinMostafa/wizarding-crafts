@@ -10,7 +10,8 @@ function SignUp() {
     const { createUser, updateName, updatePhotoURL, googleSignIn, githubSignIn } = useContext(AuthContext);
 
     const [error, setError] = useState(null);
-    const [password, setPassword] = useState(null)
+    const [name, setName] = useState(null);
+    const [password, setPassword] = useState(null);
     const [confirmPassword, setConfirmPassword] = useState(password);
 
     useEffect(() => {
@@ -19,6 +20,10 @@ function SignUp() {
 
     
 
+    const handleNameChange = (e) => {
+        setName(e.target.value)
+        console.log(e.target.value)
+    }
     const handlePasswordChange = (e) => {
         setPassword(e.target.value)
     }
@@ -41,7 +46,6 @@ function SignUp() {
         e.preventDefault()
 
         const form = e.target;
-        const name = form.name.value;
         const photoURL = form.photoURL.value;
         const email = form.email.value;
 
@@ -57,6 +61,7 @@ function SignUp() {
             .then(res => {
                 if (res.user) {
                     updateName(name)
+                    .then(res=>console.log(res))
                     updatePhotoURL(photoURL)
                     Toast.fire({
                         icon: "success",
@@ -113,7 +118,7 @@ function SignUp() {
                     <label className="label">
                         <span className="label-text">Name</span>
                     </label>
-                    <input name="name" type="text" placeholder="Your Name" className="input input-bordered" required />
+                    <input onChange={handleNameChange} type="text" placeholder="Your Name" className="input input-bordered" required />
                 </div>
                 <div className="form-control">
                     <label className="label">

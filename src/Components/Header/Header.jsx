@@ -14,10 +14,10 @@ function Header() {
     const NavLinks = () => {
         return <>
             <li><NavLink to='/'>Home</NavLink></li>
-            <li><NavLink to='/All-Art-&-Craft-Items'>All Art & craft Items</NavLink></li>
+            <li><NavLink to='/crafts'>All Art & craft Items</NavLink></li>
             {user ? <>
-            <li><NavLink to='/Add-Craft-Item'>Add Craft Item</NavLink></li>
-            <li><NavLink to='/My-Art-&-Craft-List'>My Art&Craft List</NavLink></li>
+            <li><NavLink to='/add-craft'>Add Craft Item</NavLink></li>
+            <li><NavLink to={`/mycrafts/${user.email}`}>My Art&Craft List</NavLink></li>
             </> : <></>}
         </>
     }

@@ -10,6 +10,8 @@ import AllArtAndCraftItems from "../Pages/AllArtAndCraftItems/AllArtAndCraftItem
 import AddCraftItem from "../Pages/AddCraftItem/AddCraftItem";
 import MyArtAndCraftList from "../Pages/MyArtAndCraftList/MyArtAndCraftList";
 import Craft from "../Pages/Craft/Craft";
+import PrivateRoute from "./PrivateRoute";
+import EditCraftItem from "../Pages/EditCraftItem/EditCraftItem";
 
 const router = createBrowserRouter([
     {
@@ -30,21 +32,26 @@ const router = createBrowserRouter([
                 element: <SignUp></SignUp>
             },
             {
-                path: '/All-Art-&-Craft-Items',
+                path: '/crafts',
                 element: <AllArtAndCraftItems></AllArtAndCraftItems>
             },
             {
                 path: '/craft/:id',
-                element: <Craft></Craft>,
+                element: <PrivateRoute><Craft></Craft></PrivateRoute>,
                 loader: ({params}) => fetch(`http://localhost:5000/craft/${params.id}`)
             },
             {
-                path: '/Add-Craft-Item',
-                element: <AddCraftItem></AddCraftItem>
+                path: '/edit-craft/:id',
+                element: <PrivateRoute><EditCraftItem></EditCraftItem></PrivateRoute>,
+                loader: ({params}) => fetch(`http://localhost:5000/craft/${params.id}`)
             },
             {
-                path: '/My-Art-&-Craft-List',
-                element: <MyArtAndCraftList></MyArtAndCraftList>
+                path: '/add-craft',
+                element: <PrivateRoute><AddCraftItem></AddCraftItem></PrivateRoute>
+            },
+            {
+                path: '/mycrafts/:email',
+                element: <PrivateRoute><MyArtAndCraftList></MyArtAndCraftList></PrivateRoute>
             },
             {
                 path: '/about',

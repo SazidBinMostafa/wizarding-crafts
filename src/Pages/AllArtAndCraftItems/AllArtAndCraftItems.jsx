@@ -30,7 +30,7 @@ function AllArtAndCraftItems() {
             <table className="table border w-full table-zebra text-xl">
                 <tbody>
                     {crafts && crafts.map(craft => <tr key={craft._id} className="align-middle text-center">
-                        <td className="w-40"><img src={craft.imageURL} alt="" /></td>
+                        <td className="craftBg w-40"><img src={craft.imageURL} alt="" /></td>
                         <td>{craft.name}</td>
                         <td><Link className="btn btn-outline" to={`/craft/${craft._id}`}>View Details</Link></td>
                     </tr>)}

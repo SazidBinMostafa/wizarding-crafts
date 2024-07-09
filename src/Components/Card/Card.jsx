@@ -1,11 +1,33 @@
 import { Link } from 'react-router-dom';
 import './Card.css'
 import PropTypes from 'prop-types';
+import Swal from 'sweetalert2';
 
-function Card({craft}) {
+function Card({craft, crafts, setCrafts}) {
 
-    const { name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus, userEmail, userName
+    const { _id ,name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus, userEmail, userName
     } = craft;
+
+    const handleRemove = () =>{
+        fetch(`http://localhost:5000/craft/${_id}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type' : 'application/json'
+            },
+        })
+        .then(res=> res.json())
+        .then(({deletedCount})=> {
+            if(deletedCount > 0){
+                Swal.fire({
+                    title: "Removed",
+                    text: "Your Coffee has been removed.",
+                    icon: "success"
+                });
+                const remainingCrafts = crafts.filter(c=> c._id !==  _id)
+                setCrafts(remainingCrafts)
+            }
+        })
+    }
 
     return <>
        <div className="card border bg-base-100 shadow-xl font-semibold w-fit">
@@ -17,13 +39,13 @@ function Card({craft}) {
             <div className="card-body">
                 <h2 className="card-title">{name}</h2>
                 <p className='flex items-center'>Rating: {rating} <span className="material-symbols-outlined">star</span></p>
-                <p>{craft.price} tk</p>
+                <p>Price: {craft.price} tk</p>
                 <p>Customization: {customization}</p>
-                <p>stockStatus: <span className='text-green-600'>{stockStatus}</span></p>
-                <div className="card-actions">
+                <p>stockStatus: <span className={stockStatus === "In stock" ? 'text-green-500' : ''}>{stockStatus}</span></p>
+                <div className="card-actions my-5">
                     <Link to={`http://localhost:5173/craft/${craft._id}`} className="btn btn-outline">View details</Link>
-                    <Link to={`http://localhost:5173/craft/${craft._id}`} className="btn btn-outline btn-success">Edit</Link>
-                    <btn className="btn btn-outline btn-error">Remove</btn>
+                    <Link to={`http://localhost:5173/edit-craft/${craft._id}`} className="btn btn-outline btn-success">Edit</Link>
+                    <button onClick={handleRemove} className="btn btn-outline btn-error" >Remove</button>
                 </div>
             </div>
         </div>

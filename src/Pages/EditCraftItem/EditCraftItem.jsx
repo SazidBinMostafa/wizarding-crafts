@@ -1,12 +1,17 @@
 import { useContext } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { useLoaderData } from "react-router-dom";
 
 
-function AddCraftItem() {
+function EditCraftItem() {
 
     const {user} = useContext(AuthContext)
     const {displayName, email} = user;
+
+    const craft = useLoaderData();
+    const { _id ,name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus, userEmail, userName
+    } = craft;
 
 
     const handleSubmit = (e) => {
@@ -25,22 +30,22 @@ function AddCraftItem() {
         const userName = form.userName.value;
 
 
-        const newItem = { name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus, userEmail, userName };
+        const updatedCraftItem = { name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus, userEmail, userName };
 
 
-        fetch('http://localhost:5000/crafts', {
-            method: 'POST',
+        fetch(`http://localhost:5000/craft/${_id}`, {
+            method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(newItem)
+            body: JSON.stringify(updatedCraftItem)
         })
             .then(res => res.json())
-            .then(({ insertedId }) => {
-                if (insertedId) {
+            .then(({modifiedCount}) => {
+                if (modifiedCount > 0) {
                     Swal.fire({
                         title: 'Success!',
-                        text: 'You have successfully added an item',
+                        text: 'You have successfully updated the item',
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     })
@@ -56,8 +61,8 @@ function AddCraftItem() {
         <section>
             <div className='bg-[#F4F3F0] p-5 lg:p-14 text-center w-fit mx-auto'>
                 <div className=' max-w-3xl mb-5'>
-                    <h3 className='text-3xl font-bold mb-3'>Add New Craft Item</h3>
-                    <p>Add a new craft item to your list</p>
+                    <h3 className='text-3xl font-bold mb-3'>Update Craft Item</h3>
+                    <p>Update a craft item of your list</p>
                 </div>
                 <form onSubmit={handleSubmit} className='max-w-3xl'>
                     <div>
@@ -66,33 +71,33 @@ function AddCraftItem() {
                                 <div className="label">
                                     <span className="label-text">Name</span>
                                 </div>
-                                <input required name='name' type="text" placeholder="Enter craft item name" className="input input-bordered w-full" />
+                                <input defaultValue={name} required name='name' type="text" placeholder="Enter craft item name" className="input input-bordered w-full" />
                             </label>
                             <label className="form-control w-full">
                                 <div className="label">
                                     <span className="label-text">Subcategory Name</span>
                                 </div>
-                                <input required name='subcategory' type="text" placeholder="Enter subcategory name" className="input input-bordered w-full" />
+                                <input defaultValue={subcategory} value={subcategory} required name='subcategory' type="text" placeholder="Enter subcategory name" className="input input-bordered w-full" />
                             </label>
                         </div>
                         <label className="form-control w-full col-span-2">
                             <div className="label">
                                 <span className="label-text">Photo URL</span>
                             </div>
-                            <input required name='imageURL' type="text" placeholder="Enter photo URL" className="input input-bordered w-full" />
+                            <input defaultValue={imageURL} required name='imageURL' type="text" placeholder="Enter photo URL" className="input input-bordered w-full" />
                         </label>
                         <div className='md:flex gap-5 w-full'>
                             <label className="form-control w-full">
                                 <div className="label">
                                     <span className="label-text">Price</span>
                                 </div>
-                                <input required name='price' type="text" placeholder="Price" className="input input-bordered w-full" />
+                                <input defaultValue={price} required name='price' type="text" placeholder="Price" className="input input-bordered w-full" />
                             </label>
                             <label className="form-control w-full">
                                 <div className="label">
                                     <span className="label-text">Processing Time</span>
                                 </div>
-                                <input required name='processingTime' type="text" placeholder="Enter processing time" className="input input-bordered w-full" />
+                                <input defaultValue={processingTime} required name='processingTime' type="text" placeholder="Enter processing time" className="input input-bordered w-full" />
                             </label>
                         </div>
                         <div className='md:flex gap-5 w-full'>
@@ -147,14 +152,14 @@ function AddCraftItem() {
                             <div className="label">
                                 <span className="label-text">Description</span>
                             </div>
-                            <textarea required name='description' type="text" placeholder="Write a short description" className="textarea textarea-bordered w-full" />
+                            <textarea defaultValue={description} required name='description' type="text" placeholder="Write a short description" className="textarea textarea-bordered w-full" />
                         </label>
                     </div>
-                    <input className='btn btn-block btn-neutral mt-5' type="submit" value="Add" />
+                    <input className='btn btn-block btn-neutral mt-5' type="submit" value="Update" />
                 </form>
             </div>
         </section>
     </>
 }
 
-export default AddCraftItem;
+export default EditCraftItem;

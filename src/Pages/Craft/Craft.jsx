@@ -8,7 +8,7 @@ function Craft() {
     const { name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus, userEmail, userName
     } = craft;
     return <>
-        <div className="bg-base-200 font-bold py-5"><Link className="flex items-cente gap-1" to={'/All-Art-&-Craft-Items'}><span className="material-symbols-outlined">arrow_back</span>Go back</Link></div>
+        <div className="bg-base-200 font-bold py-5"><Link className="flex items-cente gap-1" to='/crafts'><span className="material-symbols-outlined">arrow_back</span>Go back</Link></div>
         <div className="hero bg-base-200 min-h-screen px-5 md:px-14 lg:px-32">
             <div className="hero-content flex-col lg:flex-row">
                 <div id="craftImage" className="bg-center">
@@ -30,7 +30,7 @@ function Craft() {
                     <p>Price: <div className="badge badge-success badge-outline">{price} tk</div></p>
                     <p>Processing Time: <div className="badge badge-outline">{processingTime}</div></p>
                     </div>
-                    <button className="btn btn-neutral">Get Started</button>
+                    <button className="btn btn-neutral">Buy</button>
                 </div>
             </div>
         </div>

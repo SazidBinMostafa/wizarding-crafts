@@ -5,3 +5,10 @@
 .table td{
     border: 1px solid black;
 }
+
+.craftBg{
+    background-image: url('/background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
