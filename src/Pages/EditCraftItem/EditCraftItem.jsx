@@ -59,7 +59,7 @@ function EditCraftItem() {
 
     return <>
         <section>
-            <div className='bg-[#F4F3F0] p-5 lg:p-14 text-center w-fit mx-auto'>
+            <div className='bg-[#F4F3F0] p-5 lg:p-14 text-center w-fit mx-auto rounded-3xl'>
                 <div className=' max-w-3xl mb-5'>
                     <h3 className='text-3xl font-bold mb-3'>Update Craft Item</h3>
                     <p>Update a craft item of your list</p>
@@ -138,7 +138,9 @@ function EditCraftItem() {
                                     <span className="label-text">User Name</span>
                                 </div>
                                 <div className="border border-gray-300 rounded-lg">
-                                    <input required defaultValue={displayName} name='userName' type="text" placeholder="Enter your user name" className="input input-bordered w-full" />
+                                    <div className="border border-gray-300 rounded-lg">
+                                    <input disabled required defaultValue={displayName} name='userName' type="text" placeholder="Enter your user name" className="input input-bordered w-full" />
+                                    </div>
                                 </div>
                             </label>
                             <label className="form-control w-full">
