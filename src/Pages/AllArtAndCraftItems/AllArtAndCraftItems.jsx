@@ -25,7 +25,7 @@ function AllArtAndCraftItems() {
     }
 
     return <>
-        <section className="mx-5 md:mx-42 lg:mx-32">
+        <section className="mx-5 md:mx-14 lg:mx-32">
         <h1 className="text-3xl font-bold my-14 text-center">Magical Creations: Browse All Crafts Items</h1>
             <table className="table border w-full table-zebra text-xl">
                 <tbody>

@@ -22,7 +22,6 @@ function SignUp() {
 
     const handleNameChange = (e) => {
         setName(e.target.value)
-        console.log(e.target.value)
     }
     const handlePasswordChange = (e) => {
         setPassword(e.target.value)
@@ -112,7 +111,7 @@ function SignUp() {
     }
 
     return <>
-        <section className="card-body max-w-lg bg-gray-200 mx-auto">
+        <section className="card-body max-w-lg bg-gray-200 mx-auto rounded-3xl">
             <form onSubmit={handleSubmit}>
                 <div className="form-control">
                     <label className="label">

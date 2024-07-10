@@ -6,11 +6,11 @@ import { useLoaderData } from "react-router-dom";
 
 function EditCraftItem() {
 
-    const {user} = useContext(AuthContext)
-    const {displayName, email} = user;
+    const { user } = useContext(AuthContext)
+    const { displayName, email } = user;
 
     const craft = useLoaderData();
-    const { _id ,name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus, userEmail, userName
+    const { _id, name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus, userEmail, userName
     } = craft;
 
 
@@ -41,7 +41,7 @@ function EditCraftItem() {
             body: JSON.stringify(updatedCraftItem)
         })
             .then(res => res.json())
-            .then(({modifiedCount}) => {
+            .then(({ modifiedCount }) => {
                 if (modifiedCount > 0) {
                     Swal.fire({
                         title: 'Success!',
@@ -137,14 +137,16 @@ function EditCraftItem() {
                                 <div className="label">
                                     <span className="label-text">User Name</span>
                                 </div>
-                                <input required defaultValue={displayName} name='userName' type="text" placeholder="Enter your user name" className="input input-bordered w-full" />
+                                <div className="border border-gray-300 rounded-lg">
+                                    <input required defaultValue={displayName} name='userName' type="text" placeholder="Enter your user name" className="input input-bordered w-full" />
+                                </div>
                             </label>
                             <label className="form-control w-full">
                                 <div className="label">
                                     <span className="label-text">User Email</span>
                                 </div>
                                 <div className="border border-gray-300 rounded-lg">
-                                <input disabled required defaultValue={email} name='userEmail' type="email" placeholder="Enter your user email" className="input input-bordered w-full" />
+                                    <input disabled required defaultValue={email} name='userEmail' type="email" placeholder="Enter your user email" className="input input-bordered w-full" />
                                 </div>
                             </label>
                         </div>

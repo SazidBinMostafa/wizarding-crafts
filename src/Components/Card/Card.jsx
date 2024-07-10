@@ -3,34 +3,49 @@ import './Card.css'
 import PropTypes from 'prop-types';
 import Swal from 'sweetalert2';
 
-function Card({craft, crafts, setCrafts}) {
+function Card({ craft, crafts, setCrafts }) {
 
-    const { _id ,name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus, userEmail, userName
+    const { _id, name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus, userEmail, userName
     } = craft;
 
-    const handleRemove = () =>{
-        fetch(`http://localhost:5000/craft/${_id}`, {
-            method: 'DELETE',
-            headers: {
-                'content-type' : 'application/json'
-            },
-        })
-        .then(res=> res.json())
-        .then(({deletedCount})=> {
-            if(deletedCount > 0){
-                Swal.fire({
-                    title: "Removed",
-                    text: "Your Coffee has been removed.",
-                    icon: "success"
-                });
-                const remainingCrafts = crafts.filter(c=> c._id !==  _id)
-                setCrafts(remainingCrafts)
+    const handleRemove = () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/craft/${_id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                })
+                    .then(res => res.json())
+                    .then(({ deletedCount }) => {
+                        if (deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                            const remainingCrafts = crafts.filter(c => c._id !== _id)
+                            setCrafts(remainingCrafts)
+                        }
+                    })
+                
             }
-        })
+        });
+
+
     }
 
     return <>
-       <div className="card border bg-base-100 shadow-xl font-semibold w-fit">
+        <div className="card border bg-base-100 shadow-xl font-semibold w-fit">
             <figure id='cardImage' className='bg-center h-96'>
                 <img className='w-60'
                     src={imageURL}

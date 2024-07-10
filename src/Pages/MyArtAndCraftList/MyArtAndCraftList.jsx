@@ -26,6 +26,17 @@ function MyArtAndCraftList() {
         </div>
     }
 
+    if(crafts.length === 0){
+        return <>
+        <section className="mx-5 md:mx-14">
+            <h1 className="text-3xl font-bold my-14 text-center">My Magical Creations</h1>
+            <div className="text-center">
+                <h3>You haven't added any craft yet</h3>
+            </div>
+        </section>
+    </>
+    }
+
     return <>
         <section className="mx-5 md:mx-14">
             <h1 className="text-3xl font-bold my-14 text-center">My Magical Creations</h1>

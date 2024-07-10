@@ -107,7 +107,7 @@ function Login() {
     }
 
     return <>
-        <section className="card-body max-w-lg bg-gray-200 mx-auto">
+        <section className="card-body max-w-lg bg-gray-200 mx-auto rounded-3xl">
             <form onSubmit={handleSubmit}>
                 <div className="form-control">
                     <label className="label">
@@ -121,12 +121,12 @@ function Login() {
                     </label>
                     <input onChange={handlePasswordChange} name="password" type="password" placeholder="password" className="input input-bordered" required/>
                     <div className="label">
-                        <button onClick={handleForgotPassword} className="label-text-alt link link-hover">Forgot password?</button>
+                        <button type="button" onClick={handleForgotPassword} className="label-text-alt link link-hover">Forgot password?</button>
                     </div>
                 </div>
                 <p className="text-red-500">{error}</p>
                 <div className="form-control my-6">
-                    <button className="btn btn-neutral">Login</button>
+                    <button  type="submit" className="btn btn-neutral">Login</button>
                 </div>
                 <p>New here? <Link className="link text-blue-800" to='/sign-up'>Sign Up now!</Link></p>
             </form>

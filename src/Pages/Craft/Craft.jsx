@@ -1,5 +1,6 @@
 import { Link, useLoaderData } from "react-router-dom";
 import './Craft.css'
+import Swal from "sweetalert2";
 
 
 function Craft() {
@@ -7,6 +8,16 @@ function Craft() {
     const craft = useLoaderData();
     const { name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus, userEmail, userName
     } = craft;
+
+    const handleBuy = () =>{
+        Swal.fire({
+            title: 'Success!',
+            text: 'You will recieve an email shortly',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          })
+    }
+
     return <>
         <div className="bg-base-200 font-bold py-5"><Link className="flex items-cente gap-1" to='/crafts'><span className="material-symbols-outlined">arrow_back</span>Go back</Link></div>
         <div className="hero bg-base-200 min-h-screen px-5 md:px-14 lg:px-32">
@@ -30,7 +41,7 @@ function Craft() {
                     <p>Price: <div className="badge badge-success badge-outline">{price} tk</div></p>
                     <p>Processing Time: <div className="badge badge-outline">{processingTime}</div></p>
                     </div>
-                    <button className="btn btn-neutral">Buy</button>
+                    <button onClick={handleBuy} className="btn btn-neutral">Buy Now</button>
                 </div>
             </div>
         </div>
