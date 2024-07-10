@@ -17,7 +17,7 @@ function Header() {
             <li><NavLink to='/crafts'>All Art & craft Items</NavLink></li>
             {user ? <>
             <li><NavLink to='/add-craft'>Add Craft Item</NavLink></li>
-            <li><NavLink to={`/mycrafts/${user.email}`}>My Art&Craft List</NavLink></li>
+            <li><NavLink to={`/mycrafts/${user.email}`}>My Art & Craft List</NavLink></li>
             </> : <></>}
         </>
     }

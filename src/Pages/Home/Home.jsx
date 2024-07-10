@@ -14,6 +14,8 @@ function Home() {
       className='mb-24'
     >
       <SwiperSlide><img src="/Banner.png" alt="" /></SwiperSlide>
+      <SwiperSlide><img src="/Jewellery_Banner.png" alt="" /></SwiperSlide>
+      <SwiperSlide><img src="/Trunk_Banner.png" alt="" /></SwiperSlide>
     </Swiper>
 
     <AllArtAndCraftItems></AllArtAndCraftItems>
