@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import { Icon } from '@iconify/react';
@@ -13,6 +13,7 @@ function SignUp() {
     const [name, setName] = useState(null);
     const [password, setPassword] = useState(null);
     const [confirmPassword, setConfirmPassword] = useState(password);
+    const previousLocation = useLocation().state || '/' ;
 
     useEffect(() => {
         setConfirmPassword(password);
@@ -60,13 +61,14 @@ function SignUp() {
             .then(res => {
                 if (res.user) {
                     updateName(name)
-                    .then(res=>console.log(res))
                     updatePhotoURL(photoURL)
-                    Toast.fire({
-                        icon: "success",
-                        title: "Signed in successfully"
-                    });
-                    navigate('/')
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'You have successfully created an account',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                    navigate(previousLocation)
                 }
             })
             .catch(error => {
@@ -88,7 +90,7 @@ function SignUp() {
                         icon: "success",
                         title: "Signed in successfully"
                     });
-                    navigate('/')
+                    navigate(previousLocation)
                     setError(null)
                 }
             })
@@ -103,7 +105,7 @@ function SignUp() {
                         icon: "success",
                         title: "Signed in successfully"
                     });
-                    navigate('/')
+                    navigate(previousLocation)
                     setError(null)
                 }
             })

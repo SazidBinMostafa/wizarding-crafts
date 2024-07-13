@@ -1,16 +1,21 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 
 
 function EditCraftItem() {
 
     const { user } = useContext(AuthContext)
     const { displayName, email } = user;
+    const {id} = useParams();
+    const navigate = useNavigate();
 
-    const craft = useLoaderData();
-    const { _id, name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus, userEmail, userName
+    const loadedCraft = useLoaderData();
+
+    const [craft, setCraft] = useState(loadedCraft)
+
+    const { name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus
     } = craft;
 
 
@@ -33,7 +38,7 @@ function EditCraftItem() {
         const updatedCraftItem = { name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus, userEmail, userName };
 
 
-        fetch(`http://localhost:5000/craft/${_id}`, {
+        fetch(`http://localhost:5000/craft/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -43,6 +48,8 @@ function EditCraftItem() {
             .then(res => res.json())
             .then(({ modifiedCount }) => {
                 if (modifiedCount > 0) {
+                    setCraft(updatedCraftItem)
+                    navigate(`/mycrafts/${email}`)
                     Swal.fire({
                         title: 'Success!',
                         text: 'You have successfully updated the item',
@@ -56,9 +63,13 @@ function EditCraftItem() {
 
 
     }
+    const handleGoBack = () =>{
+        navigate(-1)
+    }
 
     return <>
-        <section>
+        <div className="font-bold py-5"><button onClick={handleGoBack} className="flex items-cente gap-1" to='/crafts'><span className="material-symbols-outlined">arrow_back</span>Go back</button></div>
+        <section className="mb-14">
             <div className='bg-[#F4F3F0] p-5 lg:p-14 text-center w-fit mx-auto rounded-3xl'>
                 <div className=' max-w-3xl mb-5'>
                     <h3 className='text-3xl font-bold mb-3'>Update Craft Item</h3>
@@ -77,7 +88,7 @@ function EditCraftItem() {
                                 <div className="label">
                                     <span className="label-text">Subcategory Name</span>
                                 </div>
-                                <input defaultValue={subcategory} value={subcategory} required name='subcategory' type="text" placeholder="Enter subcategory name" className="input input-bordered w-full" />
+                                <input defaultValue={subcategory} required name='subcategory' type="text" placeholder="Enter subcategory name" className="input input-bordered w-full" />
                             </label>
                         </div>
                         <label className="form-control w-full col-span-2">
@@ -105,8 +116,8 @@ function EditCraftItem() {
                                 <div className="label">
                                     <span className="label-text">Customization</span>
                                 </div>
-                                <select required name="customization" className="select select-bordered w-full max-w-xs">
-                                    <option selected>Yes</option>
+                                <select defaultValue={customization} required name="customization" className="select select-bordered w-full max-w-xs">
+                                    <option>Yes</option>
                                     <option>No</option>
                                 </select>
                             </label>
@@ -114,8 +125,8 @@ function EditCraftItem() {
                                 <div className="label">
                                     <span className="label-text">Stock Status</span>
                                 </div>
-                                <select required name="stockStatus" className="select select-bordered w-full max-w-xs">
-                                    <option selected>In stock</option>
+                                <select defaultValue={stockStatus} required name="stockStatus" className="select select-bordered w-full max-w-xs">
+                                    <option>In stock</option>
                                     <option>Made to order</option>
                                 </select>
                             </label>
@@ -123,8 +134,8 @@ function EditCraftItem() {
                                 <div className="label">
                                     <span className="label-text">Rating</span>
                                 </div>
-                                <select required name="rating" className="select select-bordered w-full max-w-xs">
-                                    <option selected>5</option>
+                                <select required defaultValue={rating} name="rating" className="select select-bordered w-full max-w-xs">
+                                    <option>5</option>
                                     <option>4</option>
                                     <option>3</option>
                                     <option>2</option>

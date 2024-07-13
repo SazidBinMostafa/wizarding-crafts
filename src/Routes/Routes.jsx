@@ -12,6 +12,8 @@ import MyArtAndCraftList from "../Pages/MyArtAndCraftList/MyArtAndCraftList";
 import Craft from "../Pages/Craft/Craft";
 import PrivateRoute from "./PrivateRoute";
 import EditCraftItem from "../Pages/EditCraftItem/EditCraftItem";
+import Profile from "../Pages/Profile/Profile";
+import Settings from "../Pages/Settings/Settings";
 
 const router = createBrowserRouter([
     {
@@ -52,6 +54,14 @@ const router = createBrowserRouter([
             {
                 path: '/mycrafts/:email',
                 element: <PrivateRoute><MyArtAndCraftList></MyArtAndCraftList></PrivateRoute>
+            },
+            {
+                path: '/profile',
+                element: <PrivateRoute><Profile></Profile></PrivateRoute>
+            },
+            {
+                path: '/settings',
+                element: <PrivateRoute><Settings></Settings></PrivateRoute>
             },
             {
                 path: '/about',

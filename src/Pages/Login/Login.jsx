@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import { Icon } from '@iconify/react';
@@ -9,6 +9,7 @@ function Login() {
 
     const { loginUser, googleSignIn, githubSignIn, forgotPassword } = useContext(AuthContext);
     const [ error, setError ] = useState(null);
+    const previousLocation = useLocation().state || '/';
 
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null)
@@ -46,7 +47,7 @@ function Login() {
                         icon: "success",
                         title: "Signed in successfully"
                     });
-                    navigate('/')
+                    navigate(previousLocation)
                     setError(null)
                 }
             })
@@ -61,7 +62,7 @@ function Login() {
                         icon: "success",
                         title: "Signed in successfully"
                     });
-                    navigate('/')
+                    navigate(previousLocation)
                     setError(null)
                 }
             })
@@ -76,7 +77,7 @@ function Login() {
                         icon: "success",
                         title: "Signed in successfully"
                     });
-                    navigate('/')
+                    navigate(previousLocation)
                     setError(null)
                 }
             })
@@ -113,13 +114,13 @@ function Login() {
                     <label className="label">
                         <span className="label-text">Email</span>
                     </label>
-                    <input onChange={handleEmailChange} name="email" type="email" placeholder="email" className="input input-bordered" required />
+                    <input onChange={handleEmailChange} name="email" type="email" placeholder="Your Email" className="input input-bordered" required />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Password</span>
                     </label>
-                    <input onChange={handlePasswordChange} name="password" type="password" placeholder="password" className="input input-bordered" required/>
+                    <input onChange={handlePasswordChange} name="password" type="password" placeholder="Your Password" className="input input-bordered" required/>
                     <div className="label">
                         <button type="button" onClick={handleForgotPassword} className="label-text-alt link link-hover">Forgot password?</button>
                     </div>

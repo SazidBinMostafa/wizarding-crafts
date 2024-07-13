@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Providers/AuthProvider";
+import 'react-tooltip/dist/react-tooltip.css';
+import { Tooltip } from 'react-tooltip'
 
 
 function AddCraftItem() {
 
-    const {user} = useContext(AuthContext)
-    const {displayName, email} = user;
+    const { user } = useContext(AuthContext)
+    const { displayName, email } = user;
 
 
     const handleSubmit = (e) => {
@@ -53,7 +55,8 @@ function AddCraftItem() {
     }
 
     return <>
-        <section>
+        <Tooltip id="my-tooltip" />
+        <section className="mb-14">
             <div className='bg-[#F4F3F0] p-5 lg:p-14 text-center w-fit mx-auto rounded-3xl'>
                 <div className=' max-w-3xl mb-5'>
                     <h3 className='text-3xl font-bold mb-3'>Add New Craft Item</h3>
@@ -132,17 +135,30 @@ function AddCraftItem() {
                                 <div className="label">
                                     <span className="label-text">User Name</span>
                                 </div>
-                                <div className="border border-gray-300 rounded-lg">
-                                <input disabled required defaultValue={displayName} name='userName' type="text" placeholder="Enter your user name" className="input input-bordered w-full" />
-                                </div>
+                                <a
+                                    data-tooltip-id="my-tooltip"
+                                    data-tooltip-content={displayName}
+                                    data-tooltip-place="top"
+                                >
+                                    <div className="border border-gray-300 rounded-lg">
+                                        <input disabled required defaultValue={displayName} name='userName' type="text" placeholder="Enter your user name" className="input input-bordered w-full" />
+                                    </div>
+                                </a>
                             </label>
                             <label className="form-control w-full">
                                 <div className="label">
                                     <span className="label-text">User Email</span>
                                 </div>
+                                <a
+                                    data-tooltip-id="my-tooltip"
+                                    data-tooltip-content={email}
+                                    data-tooltip-place="top"
+                                >
+                                
                                 <div className="border border-gray-300 rounded-lg">
-                                <input disabled required defaultValue={email} name='userEmail' type="email" placeholder="Enter your user email" className="input input-bordered w-full" />
+                                    <input disabled required defaultValue={email} name='userEmail' type="email" placeholder="Enter your user email" className="input input-bordered w-full" />
                                 </div>
+                                </a>
                             </label>
                         </div>
                         <label className="form-control w-full">
