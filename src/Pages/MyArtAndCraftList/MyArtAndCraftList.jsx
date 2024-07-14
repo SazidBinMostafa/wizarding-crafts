@@ -26,7 +26,7 @@ function MyArtAndCraftList() {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/craft/${_id}`, {
+                fetch(`https://wizarding-crafts-server.vercel.app/craft/${_id}`, {
                     method: 'DELETE',
                     headers: {
                         'content-type': 'application/json'
@@ -52,7 +52,7 @@ function MyArtAndCraftList() {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:5000/crafts/${email}`)
+        fetch(`https://wizarding-crafts-server.vercel.app/crafts/${email}`)
             .then(res => res.json())
             .then(data => {
                 setCrafts(data)
@@ -91,8 +91,8 @@ function MyArtAndCraftList() {
                             <div className="badge badge-outline badge-lg">Rating : {craft.rating}<span className="material-symbols-outlined">star</span></div>
                         </td>
                         <td className="flex flex-col gap-5 items-center">
-                            <Link to={`http://localhost:5173/craft/${craft._id}`} className="w-32 btn btn-outline mx-auto">View details</Link>
-                            <Link to={`http://localhost:5173/edit-craft/${craft._id}`} className="w-32 btn btn-outline btn-success">Edit</Link>
+                            <Link to={`/craft/${craft._id}`} className="w-32 btn btn-outline mx-auto">View details</Link>
+                            <Link to={`/edit-craft/${craft._id}`} className="w-32 btn btn-outline btn-success">Edit</Link>
 
                             <button onClick={() => handleRemove(craft._id)} className="w-32 btn btn-outline btn-error" >Remove</button>
                         </td>

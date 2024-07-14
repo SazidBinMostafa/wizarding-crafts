@@ -30,7 +30,7 @@ function AddCraftItem() {
         const newItem = { name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus, userEmail, userName };
 
 
-        fetch('http://localhost:5000/crafts', {
+        fetch('https://wizarding-crafts-server.vercel.app/crafts', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

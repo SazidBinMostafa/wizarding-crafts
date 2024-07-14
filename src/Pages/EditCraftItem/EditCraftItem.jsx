@@ -38,7 +38,7 @@ function EditCraftItem() {
         const updatedCraftItem = { name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus, userEmail, userName };
 
 
-        fetch(`http://localhost:5000/craft/${id}`, {
+        fetch(`https://wizarding-crafts-server.vercel.app/craft/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'

@@ -10,7 +10,7 @@ function AllArtAndCraftItems() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:5000/crafts')
+        fetch('https://wizarding-crafts-server.vercel.app/crafts')
             .then(res => res.json())
             .then(data => {
                 setCrafts(data)

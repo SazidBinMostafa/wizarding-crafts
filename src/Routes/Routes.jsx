@@ -40,12 +40,12 @@ const router = createBrowserRouter([
             {
                 path: '/craft/:id',
                 element: <PrivateRoute><Craft></Craft></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/craft/${params.id}`)
+                loader: ({params}) => fetch(`https://wizarding-crafts-server.vercel.app/craft/${params.id}`)
             },
             {
                 path: '/edit-craft/:id',
                 element: <PrivateRoute><EditCraftItem></EditCraftItem></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/craft/${params.id}`)
+                loader: ({params}) => fetch(`https://wizarding-crafts-server.vercel.app/craft/${params.id}`)
             },
             {
                 path: '/add-craft',
