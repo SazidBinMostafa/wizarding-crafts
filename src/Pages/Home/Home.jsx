@@ -32,7 +32,7 @@ function Home() {
 
     {/* Art and Craft Section */}
     {crafts ? <section>
-      <h1 className='text-3xl md:text-4xl font-bold my-14 text-center'>Magical Creations: Browse All Crafts Items</h1>
+      <h1 className='text-3xl md:text-4xl font-bold my-14 text-center'>Magical Creations</h1>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-fit mx-auto'>
         {crafts && crafts.map(craft => <Card key={craft._id} craft={craft}></Card>)}
       </div>

@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
 import './Card.css'
 import PropTypes from 'prop-types';
-import Swal from 'sweetalert2';
 
-function Card({ craft, crafts, setCrafts }) {
+function Card({ craft }) {
 
-    const {name, imageURL, subcategory, description, price, rating, customization, processingTime, stockStatus, userEmail, userName
+    const {name, imageURL, rating, customization, stockStatus,
     } = craft;
 
     return <>
